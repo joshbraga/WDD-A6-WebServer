@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WDD_A6_WebServer
 {
-    class ServerListener
+    class WebServerListener
     {
         public string WebRoot { get; private set; }
         public string IpAddress { get; private set; }
@@ -16,7 +16,7 @@ namespace WDD_A6_WebServer
 
 
 
-        public ServerListener(string webRoot, string ipAddress, Int32 port)
+        public WebServerListener(string webRoot, string ipAddress, Int32 port)
         {
             WebRoot = webRoot;
             IpAddress = ipAddress;
