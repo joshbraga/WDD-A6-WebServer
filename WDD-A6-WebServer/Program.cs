@@ -10,8 +10,7 @@ namespace WDD_A6_WebServer
     {
         static void Main(string[] args)
         {
-            WebServerListener server = new WebServerListener(@"C:\", "127.0.0.1", 13000);
-            server.StartServer();
+            Logger.Log("test string");
         }
 
 

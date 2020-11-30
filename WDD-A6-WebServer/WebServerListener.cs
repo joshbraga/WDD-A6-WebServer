@@ -71,6 +71,8 @@ namespace WDD_A6_WebServer
                         // Process the data sent by the client.
                         data = data.ToUpper();
 
+
+
                         byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
                         // Send back a response.
@@ -96,6 +98,18 @@ namespace WDD_A6_WebServer
             Console.Read();
 
 
+        }
+
+
+        public string ProcessRequest (string request)
+        {
+            string response = String.Empty;
+
+
+
+
+
+            return response;
         }
 
 

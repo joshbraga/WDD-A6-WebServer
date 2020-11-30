@@ -8,5 +8,12 @@ namespace WDD_A6_WebServer
 {
     class HTTPHandler
     {
+
+
+        string ParseRequest()
+        {
+
+        }
+
     }
 }
