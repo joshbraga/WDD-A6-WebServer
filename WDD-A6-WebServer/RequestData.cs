@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace WDD_A6_WebServer
 {
-    class HTTPHandler
+    class RequestData
     {
-
-
-        string ParseRequest()
-        {
-
-            return "test";
-        }
+        public string Method { get; set; }
+        public string RequestURI { get; set; }
+        public string HTTPVersion { get; set; }
 
     }
 }
