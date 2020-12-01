@@ -16,7 +16,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.IO;
 
 
 
@@ -41,11 +40,13 @@ namespace WDD_A6_WebServer
         public string StatusMessage { get; private set; }
 
 
-        private const int ALL_OKAY = 200;                   //
-        private const int BAD_REQUEST = 400;                //
-        private const int HTTP_VERSION_NOT_SUPPORTED = 505; //
-        private const int METHOD_NOT_ALLOWED = 405;         //
-        private const int NOT_FOUND = 404;                  //
+
+        private const int ALL_OKAY = 200;                   //Everything is okay, no validation errors
+        private const int BAD_REQUEST = 400;                //File extension or HTTP structure is invalid
+        private const int HTTP_VERSION_NOT_SUPPORTED = 505; //Version 1.1 was not used
+        private const int METHOD_NOT_ALLOWED = 405;         //GET was not used
+        private const int NOT_FOUND = 404;                  //Image, or file was not found (doesn't exist)
+
 
 
         public HttpHandler()
