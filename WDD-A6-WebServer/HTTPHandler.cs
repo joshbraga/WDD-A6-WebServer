@@ -40,13 +40,11 @@ namespace WDD_A6_WebServer
         public string StatusMessage { get; private set; }
 
 
-
-        private const int ALL_OKAY = 200;                   //Everything is okay, no validation errors
-        private const int BAD_REQUEST = 400;                //File extension or HTTP structure is invalid
+        private const int ALL_OKAY = 200;                   //Everything is okay. No validation errors
+        private const int BAD_REQUEST = 400;                //Extention or HTTP Structure invalid
         private const int HTTP_VERSION_NOT_SUPPORTED = 505; //Version 1.1 was not used
         private const int METHOD_NOT_ALLOWED = 405;         //GET was not used
-        private const int NOT_FOUND = 404;                  //Image, or file was not found (doesn't exist)
-
+        private const int NOT_FOUND = 404;                  //Image, or file was not found (Doesn't exist)
 
 
         public HttpHandler()
@@ -249,7 +247,7 @@ namespace WDD_A6_WebServer
         public string CreateResponse()
         {
             string response = HTTPVersion + StatusCode + "\n";
-            string contentPath = RequestURI.Re
+            //string contentPath = RequestURI.Re
 
             if (!StatusCode.ToString().StartsWith("4") || !StatusCode.ToString().StartsWith("5"))
             {
@@ -257,11 +255,11 @@ namespace WDD_A6_WebServer
 
                 if (ContentType.StartsWith("text"))
                 {
-                    string data = File.ReadAllText(ServerRoot + contentPath);
+                    //string data = File.ReadAllText(ServerRoot + contentPath);
                 }
                 else
                 {
-                    byte[] data = File.ReadAllBytes(ServerRoot + contentPath);
+                    //byte[] data = File.ReadAllBytes(ServerRoot + contentPath);
                 }
 
                 response += "Content-Type: " + ContentType + "\n";
