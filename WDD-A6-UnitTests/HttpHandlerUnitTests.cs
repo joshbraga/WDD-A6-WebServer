@@ -22,7 +22,6 @@ namespace WDD_A6_UnitTests
             Assert.IsTrue(response);
         }
 
-
         [TestMethod]
         public void ValidateAndSetRequest_withInvalidMethod()
         {
