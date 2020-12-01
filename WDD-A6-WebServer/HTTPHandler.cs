@@ -40,11 +40,13 @@ namespace WDD_A6_WebServer
         public string StatusMessage { get; private set; }
 
 
+
         private const int ALL_OKAY = 200;                   //Everything is okay. No validation errors
-        private const int BAD_REQUEST = 400;                //Extention or HTTP Structure invalid
+        private const int BAD_REQUEST = 400;                //Extension or HTTP Structure invalid
         private const int HTTP_VERSION_NOT_SUPPORTED = 505; //Version 1.1 was not used
         private const int METHOD_NOT_ALLOWED = 405;         //GET was not used
         private const int NOT_FOUND = 404;                  //Image, or file was not found (Doesn't exist)
+
 
 
         public HttpHandler()
@@ -95,7 +97,7 @@ namespace WDD_A6_WebServer
             {
                 StatusCode = BAD_REQUEST;
             }
-            else if (ValidateFileExists(split[1]) != true)
+            else if (ValidateFileExists(split[1], serverInfo) != true)
             {
                 StatusCode = NOT_FOUND;
             }
@@ -220,21 +222,24 @@ namespace WDD_A6_WebServer
         *       This method validates if the file exists
         * PARAMETERS  :
         *       string : request (String with HTTP request)
+        *       string : serverInfo (host and port information)
         * RETURNS     : 
         *       bool : isValid (true if file exists)
         *       bool : isValid (false if file does not exist)
         */
-        private bool ValidateFileExists(string request)
+        private bool ValidateFileExists(string request, string serverInfo)
         {
             bool isValid = false;
 
-            string fileName = Path.GetFileName(request);
-            
-            //DEBUG
-            //MAKE SURE TO ACTUALLY FIGURE OUT FILE PATHS
+            //Replace http://hostInfo section of the http request with blank, so only the filePath remains
+            string fileName = request.Replace("http://", "");
+            fileName = fileName.Replace(serverInfo, "");
+
+            //Then mash the file path together with the server root and check if the file exists
+            string filePath = ServerRoot + fileName;
 
             //If file exists then change isValid to true
-            if (File.Exists(fileName) == true)
+            if (File.Exists(filePath) == true)
             {
                 isValid = true;
             }
