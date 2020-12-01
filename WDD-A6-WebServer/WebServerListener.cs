@@ -111,7 +111,5 @@ namespace WDD_A6_WebServer
 
             return response;
         }
-
-
     }
 }

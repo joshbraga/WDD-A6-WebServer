@@ -19,7 +19,6 @@ namespace WDD_A6_UnitTests
             Assert.IsTrue(response);
         }
 
-
         [TestMethod]
         public void HttpHandler_ValidateRequest_withInvalidHostname()
         {
@@ -31,8 +30,6 @@ namespace WDD_A6_UnitTests
 
             Assert.IsFalse(response);
         }
-
-
 
         [TestMethod]
         public void HttpHandler_ValidateRequest_withInvalidHeaderHttps()
