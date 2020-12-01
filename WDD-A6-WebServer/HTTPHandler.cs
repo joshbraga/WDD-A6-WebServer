@@ -40,11 +40,19 @@ namespace WDD_A6_WebServer
         public int StatusCode { get; private set; }
         public string StatusMessage { get; private set; }
 
+
         private const int ALL_OKAY = 200;                   //
         private const int BAD_REQUEST = 400;                //
         private const int HTTP_VERSION_NOT_SUPPORTED = 505; //
         private const int METHOD_NOT_ALLOWED = 405;         //
         private const int NOT_FOUND = 404;                  //
+
+
+        public HttpHandler()
+        {
+
+        }
+
 
         public HttpHandler(string serverRoot, string serverName)
         {
@@ -235,15 +243,24 @@ namespace WDD_A6_WebServer
             return isValid;
         }
 
-        public string CreateResponse(string contentPath)
+
+
+        public string CreateResponse()
         {
             string response = HTTPVersion + StatusCode + "\n";
+            string contentPath = RequestURI.Re
 
             if (!StatusCode.ToString().StartsWith("4") || !StatusCode.ToString().StartsWith("5"))
             {
+                
+
                 if (ContentType.StartsWith("text"))
                 {
-                    
+                    string data = File.ReadAllText(ServerRoot + contentPath);
+                }
+                else
+                {
+                    byte[] data = File.ReadAllBytes(ServerRoot + contentPath);
                 }
 
                 response += "Content-Type: " + ContentType + "\n";
