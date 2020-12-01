@@ -110,12 +110,13 @@ namespace WDD_A6_WebServer
                 isValid = true;
             }
 
-            //If the header is invalid in any way, log it to the log fil
-            if (isValid == false)
-            {
-                string message = "[REQUEST] " + Method + " method for " + RequestURI;
-                Logger.Log(message);
-            }
+            //Strip host info from request URI
+            string resource = RequestURI.Replace("http://", "");
+            resource = resource.Replace(serverInfo, "");
+
+            //Log incoming request
+            string message = "[REQUEST] " + Method + resource;
+            Logger.Log(message);
 
             //Build Response somewhere?
             return isValid;
