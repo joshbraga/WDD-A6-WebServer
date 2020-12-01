@@ -17,17 +17,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace WDD_A6_WebServer
 {
     public class HttpHandler
     {
+        public string ServerRoot { get; private set; }
         public string Method { get; private set; }
         public string RequestURI { get; private set; }
+        public string Host { get; private set; }
         public string HTTPVersion { get; private set; }
+        public string ContentType { get; private set; }
+        public string ServerName { get; private set; }
         public int StatusCode { get; private set; }
+        public string StatusMessage { get; private set; }
 
 
+
+        public HttpHandler(string serverRoot, string serverName)
+        {
+            ServerName = serverName;
+            ServerRoot = serverRoot;
+        }
 
 
         // METHOD               :   ValidateAndSetRequest
@@ -65,6 +77,24 @@ namespace WDD_A6_WebServer
             return isValid;
         }
 
-        
+
+        public string CreateResponse(string contentPath)
+        {
+            string response = HTTPVersion + StatusCode + "\n";
+
+            if (!StatusCode.ToString().StartsWith("4") || !StatusCode.ToString().StartsWith("5"))
+            {
+                if (ContentType.StartsWith("text"))
+                {
+                    
+                }
+
+                response += "Content-Type: " + ContentType + "\n";
+                response += "Content-Length: ";
+            }
+
+            return response;
+        }
+
     }
 }
