@@ -16,7 +16,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.IO;
 
 
 
@@ -248,7 +247,7 @@ namespace WDD_A6_WebServer
         public string CreateResponse()
         {
             string response = HTTPVersion + StatusCode + "\n";
-            string contentPath = RequestURI.Re
+            string contentPath = RequestURI.Replace(Host, "");
 
             if (!StatusCode.ToString().StartsWith("4") || !StatusCode.ToString().StartsWith("5"))
             {
@@ -256,11 +255,11 @@ namespace WDD_A6_WebServer
 
                 if (ContentType.StartsWith("text"))
                 {
-                    string data = File.ReadAllText(ServerRoot + contentPath);
+                    //string data = File.ReadAllText(ServerRoot + contentPath);
                 }
                 else
                 {
-                    byte[] data = File.ReadAllBytes(ServerRoot + contentPath);
+                    //byte[] data = File.ReadAllBytes(ServerRoot + contentPath);
                 }
 
                 response += "Content-Type: " + ContentType + "\n";
