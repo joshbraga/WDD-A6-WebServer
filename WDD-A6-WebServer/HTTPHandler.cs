@@ -40,11 +40,13 @@ namespace WDD_A6_WebServer
         public string StatusMessage { get; private set; }
 
 
-        private const int ALL_OKAY = 200;                   //
-        private const int BAD_REQUEST = 400;                //
-        private const int HTTP_VERSION_NOT_SUPPORTED = 505; //
-        private const int METHOD_NOT_ALLOWED = 405;         //
-        private const int NOT_FOUND = 404;                  //
+
+        private const int ALL_OKAY = 200;                   //Everything is okay. No validation errors
+        private const int BAD_REQUEST = 400;                //Extension or HTTP Structure invalid
+        private const int HTTP_VERSION_NOT_SUPPORTED = 505; //Version 1.1 was not used
+        private const int NOT_IMPLEMENTED = 501;            //GET was not used
+        private const int NOT_FOUND = 404;                  //Image, or file was not found (Doesn't exist)
+
 
 
         public HttpHandler()
@@ -81,7 +83,7 @@ namespace WDD_A6_WebServer
             //Validate request method to ensure GET was used
             if (ValidateRequestMethod(split[0]) != true)
             {
-                StatusCode = METHOD_NOT_ALLOWED;
+                StatusCode = NOT_IMPLEMENTED;
             }
             else if (ValidateHTTPStructure(split[1], serverInfo) != true)
             {
@@ -93,9 +95,9 @@ namespace WDD_A6_WebServer
             }
             else if (ValidateFileType(split[1]) != true)
             {
-                StatusCode = BAD_REQUEST;
+                StatusCode = NOT_IMPLEMENTED;
             }
-            else if (ValidateFileExists(split[1]) != true)
+            else if (ValidateFileExists(split[1], serverInfo) != true)
             {
                 StatusCode = NOT_FOUND;
             }
@@ -108,12 +110,13 @@ namespace WDD_A6_WebServer
                 isValid = true;
             }
 
-            //If the header is invalid in any way, log it to the log fil
-            if (isValid == false)
-            {
-                string message = "[REQUEST] " + Method + " method for " + RequestURI;
-                Logger.Log(message);
-            }
+            //Strip host info from request URI
+            string resource = RequestURI.Replace("http://", "");
+            resource = resource.Replace(serverInfo, "");
+
+            //Log incoming request
+            string message = "[REQUEST] " + Method + resource;
+            Logger.Log(message);
 
             //Build Response somewhere?
             return isValid;
@@ -220,21 +223,24 @@ namespace WDD_A6_WebServer
         *       This method validates if the file exists
         * PARAMETERS  :
         *       string : request (String with HTTP request)
+        *       string : serverInfo (host and port information)
         * RETURNS     : 
         *       bool : isValid (true if file exists)
         *       bool : isValid (false if file does not exist)
         */
-        private bool ValidateFileExists(string request)
+        private bool ValidateFileExists(string request, string serverInfo)
         {
             bool isValid = false;
 
-            string fileName = Path.GetFileName(request);
-            
-            //DEBUG
-            //MAKE SURE TO ACTUALLY FIGURE OUT FILE PATHS
+            //Replace http://hostInfo section of the http request with blank, so only the filePath remains
+            string fileName = request.Replace("http://", "");
+            fileName = fileName.Replace(serverInfo, "");
+
+            //Then mash the file path together with the server root and check if the file exists
+            string filePath = ServerRoot + fileName;
 
             //If file exists then change isValid to true
-            if (File.Exists(fileName) == true)
+            if (File.Exists(filePath) == true)
             {
                 isValid = true;
             }
