@@ -44,7 +44,7 @@ namespace WDD_A6_WebServer
         private const int ALL_OKAY = 200;                   //Everything is okay. No validation errors
         private const int BAD_REQUEST = 400;                //Extension or HTTP Structure invalid
         private const int HTTP_VERSION_NOT_SUPPORTED = 505; //Version 1.1 was not used
-        private const int METHOD_NOT_ALLOWED = 405;         //GET was not used
+        private const int NOT_IMPLEMENTED = 501;            //GET was not used
         private const int NOT_FOUND = 404;                  //Image, or file was not found (Doesn't exist)
 
 
@@ -83,7 +83,7 @@ namespace WDD_A6_WebServer
             //Validate request method to ensure GET was used
             if (ValidateRequestMethod(split[0]) != true)
             {
-                StatusCode = METHOD_NOT_ALLOWED;
+                StatusCode = NOT_IMPLEMENTED;
             }
             else if (ValidateHTTPStructure(split[1], serverInfo) != true)
             {
@@ -95,7 +95,7 @@ namespace WDD_A6_WebServer
             }
             else if (ValidateFileType(split[1]) != true)
             {
-                StatusCode = BAD_REQUEST;
+                StatusCode = NOT_IMPLEMENTED;
             }
             else if (ValidateFileExists(split[1], serverInfo) != true)
             {
