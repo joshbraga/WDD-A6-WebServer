@@ -204,7 +204,7 @@ namespace WDD_A6_WebServer
             string extension =  Path.GetExtension(request);
 
             //Regex pattern for accepted file types
-            Regex fileTypePattern = new Regex("(.txt|.html|.htm|.jpg|.jpeg|.gif)");
+            Regex fileTypePattern = new Regex("(.txt|.html|.htm|.jpg|.jpeg|.gif|.aip|.acgi|.htlms|.htx|.jfif|.jfif-tbnl|.jpe)");
 
             //If a match is found, then isValid is switched to true
             if (fileTypePattern.IsMatch(extension) == true)
