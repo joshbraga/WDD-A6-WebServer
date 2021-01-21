@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using WDD_A6_WebServer;
+using myOwnWebServer;
 
 namespace WDD_A6_UnitTests
 {

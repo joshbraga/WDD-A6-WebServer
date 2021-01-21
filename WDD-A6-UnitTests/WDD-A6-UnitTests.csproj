@@ -56,9 +56,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WDD-A6-WebServer\WDD-A6-WebServer.csproj">
-      <Project>{577c551f-ec40-45f4-a647-ec8f63c87998}</Project>
-      <Name>WDD-A6-WebServer</Name>
+    <ProjectReference Include="..\myOwnWebServer\myOwnWebServer.csproj">
+      <Project>{082d58fa-d627-455d-bd49-ef6163e8971e}</Project>
+      <Name>myOwnWebServer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
