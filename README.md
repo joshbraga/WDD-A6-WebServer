@@ -1,4 +1,4 @@
-# WDD-A6-WebServer
+# WebServer
 
 This is a very simple web server that can serve basic text content with jpeg and gif support. A simple hello world html file will
 suffice as a test file.
